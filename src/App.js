@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/header";
+import Main from "./components/main";
+import Footer from "./components/footer";
 
 function App() {
+
+  function calculateBMI(height, weight){
+    if(!height || !weight) return
+    let result = 0
+    if(height > 100){
+      result = (weight / Math.pow(height, 2))
+    }
+    result = (weight / Math.pow((height / 100), 2))
+
+    let range = ''
+    if(result => 40) range = 'Obese'
+    if(result < 24.9) range = 'Normal'
+    if(result < 18.4) range = 'Underweight'
+    
+
+    return {result: result.toFixed(1), range: range}
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-[100vh]">
+      <Header/>
+      <Main calculateBMI={calculateBMI}/>
+      <Footer />
     </div>
   );
 }
